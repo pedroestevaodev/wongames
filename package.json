@@ -110,7 +110,7 @@
     "msw": "^2.7.0",
     "plop": "^4.0.1",
     "prettier": "3.4.2",
-    "storybook": "^8.5.3",
+    "storybook": "^8.6.15",
     "text-encoding": "^0.7.0",
     "ts-jest": "^29.2.5",
     "ts-node-dev": "^2.0.0",
