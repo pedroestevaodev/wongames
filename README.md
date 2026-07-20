@@ -1,17 +1,4 @@
-# WonGames - E-commerce Client
-
-<br/>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/pedroestevaodev/boilerplate-nextjs/master/public/img/logo.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/pedroestevaodev/boilerplate-nextjs/master/public/img/logo-gh.svg">
-  <img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="https://raw.githubusercontent.com/pedroestevaodev/boilerplate-nextjs/master/public/img/logo.svg">
-</picture>
-
-<br/>
-
-This repository contains the **client** for the main project, an **e-commerce platform for games**, developed during the [React Avançado](https://reactavancado.com.br/) course, which teaches advanced React concepts while building a complete e-commerce platform. The project focuses on creating a game sales platform with an optimized shopping experience, authentication, e-commerce features, payments, and much more.
-
-## 📌 About the Project
+# WonGames
 
 <p style="text-align: center;">
   <a href="https://www.pedroestevao.com">
@@ -19,119 +6,636 @@ This repository contains the **client** for the main project, an **e-commerce pl
   </a>
 </p>
 
-The project was developed using the following technologies and tools:
+WonGames is a digital game commerce platform built as a monorepo. The repository contains a Next.js client application and a Strapi API, with centralized dependency management, development scripts, and continuous integration workflows.
 
-- [Next.js](https://nextjs.org/) - React framework for web applications.
-- [TypeScript](https://www.typescriptlang.org/) - JavaScript superset for static typing.
-- [React](https://react.dev/) - JavaScript library for building user interfaces.
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework for fast and customizable design.
-- [Styled Components](https://styled-components.com/) - Library for styling components using CSS-in-JS.
-- [Jest](https://jestjs.io/) - JavaScript testing framework.
-- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) - Testing library for React focused on interaction with the interface.
-- [Storybook](https://storybook.js.org/) - Tool for developing isolated components and visualizing them.
-- [MSW (Mock Service Worker)](https://mswjs.io/) - Tool for mocking APIs and testing interactions with services.
-- [Prettier](https://prettier.io/) - Code formatter.
-- [Eslint](https://eslint.org/) - Linter to ensure code quality and consistency.
-- [Auth.js](https://authjs.dev/) - Authentication library.
-- [Stripe](https://stripe.com/) - Payment platform for e-commerce.
-- [GraphQL Codegen](https://www.graphql-code-generator.com/) - Tool to automatically generate GraphQL code.
-- [Apollo Client](https://www.apollographql.com/docs/react/) - Client to integrate GraphQL with React.
-- [Husky](https://typicode.github.io/husky/) - Git hook tool.
-- [GitHub CI](https://github.com/features/actions) - Continuous Integration on GitHub.
+The platform provides a complete game catalog experience, including authentication, search, filtering, wishlist management, shopping cart, checkout, orders, recommendations, and content administration.
 
-## 👾 Try the Demo!
+## Overview
 
-Curious to see it in action? Experience the full potential of our project by testing the live demo!
+The project is divided into two independently deployable applications:
 
-🔗 [Try the Demo Now](https://wongames-client-puce.vercel.app/)
+| Application | Directory | Responsibility                                                                 |
+| ----------- | --------- | ------------------------------------------------------------------------------ |
+| Client      | `client/` | User interface, authentication, catalog, cart, wishlist, profile, and checkout |
+| API         | `api/`    | Content management, users, orders, payments, media, email, and database access |
 
-## 🚀 Requirements
+Both applications are managed through npm Workspaces and share a single dependency lockfile at the repository root.
 
-To run the Client, you need to have the API pre-configured on your machine.
-This client project consumes the WonGames API, available in the [wongames-api](https://github.com/pedroestevaodev/wongames-api) repository. The API provides dynamic data such as games, categories, and payment information.
+## Main Features
 
-- **API Repository (e-commerce backend):** [WonGames API](https://github.com/pedroestevaodev/wongames-api)
-- **FIGMA DESIGN:** [WonGames Design](https://www.figma.com/design/ovvUTvKUFwLzOlU2LNmohM/Won-Games-English?node-id=43-1&p=f&t=5FZQegZOJjGpufOd-0)
+* Game catalog with categories, platforms, developers, and publishers
+* Game search and filtering
+* Product detail pages
+* User registration and authentication
+* Password recovery and reset
+* Protected user area
+* Profile management
+* Shopping cart
+* Wishlist
+* Recommended and upcoming games
+* Stripe checkout integration
+* Order history
+* Administrative content management
+* Cloudinary media storage
+* GraphQL communication between the client and API
 
-## 🔧 Setup and Installation
+## Repository Structure
 
-### 1️. Install dependencies:
-```bash
-$ pnpm install
+```text
+wongames/
+├── .github/
+│   └── workflows/
+│       ├── api-ci.yml
+│       └── client-ci.yml
+│
+├── client/
+│   ├── @types/
+│   ├── actions/
+│   ├── app/
+│   ├── components/
+│   ├── contexts/
+│   ├── data/
+│   ├── generators/
+│   ├── graphql/
+│   ├── hooks/
+│   ├── lib/
+│   ├── public/
+│   ├── schemas/
+│   ├── services/
+│   ├── target/
+│   ├── utils/
+│   ├── package.json
+│   └── README.md
+│
+├── api/
+│   ├── config/
+│   ├── database/
+│   ├── public/
+│   ├── src/
+│   ├── types/
+│   ├── package.json
+│   └── README.md
+│
+├── package.json
+├── package-lock.json
+└── README.md
 ```
 
-### 2️. Create the `.env` file
+The workspace paths are relative to the root `package.json`:
 
-Create an `.env` file in the root of the project, or edit if it already exists, similar to the following structure:
-
-```bash
-NEXT_PUBLIC_API_URL="http://localhost:1337"
-NEXT_PUBLIC_GRAPHQL_SCHEMA="http://localhost:1337/graphql"
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="tobemodified"
-AUTH_URL="http://127.0.0.1:3000"
-AUTH_SECRET="tobemodified"
-NODE_ENV="tobemodified"
+```json
+{
+  "private": true,
+  "workspaces": [
+    "client",
+    "api"
+  ]
+}
 ```
 
-## 📦 What’s Included?
+Do not prefix these paths with the repository name.
 
-This project includes everything you need to start working on the game e-commerce frontend. Key features include:
+## Technology Stack
 
-- **Authentication and Authorization**: Integration with Auth.js for login and session management.
-- **UI Components**: Build reusable and testable components with React and Styled Components.
-- **Testing**: Automated tests using Jest and React Testing Library, along with API tests using MSW.
-- **Component Visualization**: Develop isolated components using Storybook.
-- **API Integration**: Consumes the e-commerce game API, using Apollo Client and GraphQL for communication.
+### Client
 
-## 📜 Commands
+* Next.js 14
+* React 18
+* TypeScript
+* Apollo Client
+* GraphQL Code Generator
+* Auth.js
+* Styled Components
+* Tailwind CSS
+* React Hook Form
+* Zod
+* Stripe.js
+* Jest
+* Testing Library
+* Storybook
+* Mock Service Worker
 
-To run the development server locally, just execute the following command:
+### API
+
+* Strapi 5
+* TypeScript
+* PostgreSQL
+* GraphQL
+* Strapi Users & Permissions
+* Stripe
+* Cloudinary
+* Nodemailer
+
+### Repository Tooling
+
+* Node.js 20
+* npm 10
+* npm Workspaces
+* GitHub Actions
+* ESLint
+* Prettier
+* Husky
+* lint-staged
+* concurrently
+
+## Requirements
+
+Install the following tools before starting:
+
+* Node.js 20
+* npm 10 or later
+* PostgreSQL
+* Git
+
+Optional infrastructure tools:
+
+* Docker
+* Docker Compose
+
+External service credentials may also be required:
+
+* Stripe
+* Cloudinary
+* SMTP provider
+
+## Installation
+
+Clone the repository:
 
 ```bash
-$ pnpm run dev
+git clone <repository-url>
+cd wongames
 ```
 
-Open your browser and visit `http://localhost:3000` to see the project in action.
+Install all workspace dependencies from the repository root:
 
-You can start editing the homepage by modifying the `app/page.tsx` file. The browser will automatically update as you make changes to the code.
+```bash
+npm install
+```
 
-Here are the main commands available for the project:
+The installation must be executed from the root directory. npm will resolve dependencies for both workspaces and generate a single `package-lock.json`.
 
-- `dev`: Starts the application in development mode on localhost:3000.
-- `build`: Creates a production version of the application.
-- `start`: Starts a simple server with the production code.
-- `lint`: Runs the linter on all project files.
-- `typecheck`: Check for type errors according to the configuration in the `tsconfig.json` file.
-- `test`: Runs Jest tests for the application. The --passWithNoTests flag ensures that Jest doesn't fail if no tests are found.
-- `test:watch`: Runs automated tests with Jest in watch mode.
-- `test:ci`: Runs Jest tests in Continuous Integration (CI) mode, ensuring tests run serially (--runInBand) for better debugging and no parallelization.
-- `generate`: Runs Plop.js, a tool for code generation, using the plopfile.js configuration to create files or templates.
-- `storybook`: Starts Storybook to visualize components on localhost:6006.
-- `build-storybook`: Creates the production version of Storybook.
-- `codegen`: Runs the GraphQL Code Generator to generate types and other code based on the GraphQL queries defined in the project, using the configuration defined in codegen.ts.
-- `prepare`: Installs and sets up Git hooks with Husky, which allows you to enforce rules and scripts before committing or pushing code (e.g., running linters or tests before commit).
+Do not maintain separate lockfiles inside `client/` or `api/`.
 
-## 📚 Learn More
+The expected lockfile structure is:
 
-To learn more about the technologies used in this project, check out the following resources:
+```text
+wongames/
+└── package-lock.json
+```
 
-- [Next.js Docs](https://nextjs.org/docs) - Learn more about Next.js features and APIs.
-- [Next.js Learn](https://nextjs.org/learn) - Interactive tutorial to learn Next.js.
-- [React Docs](https://pt-br.react.dev/learn) - Access the official React guide.
-- [Tailwind CSS Docs](https://tailwindcss.com/docs) - Learn how to use Tailwind CSS to style your application.
+The following files should not exist:
 
-## ☁️ Deploy on Vercel
+```text
+client/package-lock.json
+api/package-lock.json
+```
 
-The easiest way to deploy your Next.js application is by using the [Vercel Platform](https://vercel.com/new), created by the developers of Next.js.
+## Environment Configuration
 
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Create the environment files for each application:
 
-## 📓 How to Use this Client
+```bash
+cp client/.env.example client/.env.local
+cp api/.env.example api/.env
+```
 
-This project was developed to be the official client for the e-commerce platform. If you wish to run or contribute to this client, follow the instructions above to set up the development environment and start working.
+Configure the values according to the internal documentation:
 
-<p style="text-align: center;">
-  <a href="https://www.pedroestevao.com">
-    <img src="https://res.cloudinary.com/dge3g9rcw/image/upload/v1741210793/github/tg2nycflw9z0duxhwye2.png" alt="illustrative image" />
-  </a>
-</p>
+* [Client configuration](client/README.md)
+* [API configuration](api/README.md)
+
+Environment files, credentials, private keys, and tokens must not be committed to version control.
+
+## Running the Project
+
+Start both applications concurrently:
+
+```bash
+npm run dev
+```
+
+This command executes:
+
+```bash
+npm run dev --workspace=@wongames/client
+npm run dev --workspace=@wongames/api
+```
+
+The applications are selected by the `name` property declared in their respective `package.json` files:
+
+```json
+{
+  "name": "@wongames/client"
+}
+```
+
+```json
+{
+  "name": "@wongames/api"
+}
+```
+
+### Run only the client
+
+```bash
+npm run dev:client
+```
+
+### Run only the API
+
+```bash
+npm run dev:api
+```
+
+## Local Services
+
+By default, the applications are available at:
+
+| Service          | Address                         |
+| ---------------- | ------------------------------- |
+| Client           | `http://localhost:3000`         |
+| API              | `http://localhost:1337`         |
+| Strapi Admin     | `http://localhost:1337/admin`   |
+| GraphQL endpoint | `http://localhost:1337/graphql` |
+
+The API and PostgreSQL must be available for features that depend on authentication, content queries, orders, wishlist data, or payments.
+
+## Root Scripts
+
+| Command                    | Description                                          |
+| -------------------------- | ---------------------------------------------------- |
+| `npm run dev`              | Starts the client and API concurrently               |
+| `npm run dev:client`       | Starts only the client                               |
+| `npm run dev:api`          | Starts only the API                                  |
+| `npm run build`            | Builds the client and API                            |
+| `npm run build:client`     | Builds only the client                               |
+| `npm run build:api`        | Builds only the API                                  |
+| `npm run lint`             | Runs lint scripts in workspaces that provide them    |
+| `npm run lint:client`      | Runs the client lint validation                      |
+| `npm run lint:api`         | Runs the API lint script when available              |
+| `npm run typecheck`        | Runs TypeScript validation in supported workspaces   |
+| `npm run typecheck:client` | Runs the client TypeScript validation                |
+| `npm run typecheck:api`    | Runs the API TypeScript validation when available    |
+| `npm run test`             | Runs tests in workspaces that provide a test script  |
+| `npm run test:client`      | Runs the client test suite                           |
+| `npm run test:ci`          | Runs workspace test suites in CI mode when available |
+| `npm run codegen`          | Generates the client GraphQL artifacts               |
+| `npm run storybook`        | Starts the client Storybook environment              |
+
+## Workspace Commands
+
+Commands may also be executed directly against a workspace.
+
+### Client
+
+```bash
+npm run dev --workspace=@wongames/client
+npm run build --workspace=@wongames/client
+npm run test:ci --workspace=@wongames/client
+```
+
+### API
+
+```bash
+npm run dev --workspace=@wongames/api
+npm run build --workspace=@wongames/api
+```
+
+Workspace commands should normally be executed from the repository root.
+
+## Dependency Management
+
+Dependencies that belong exclusively to one application should be declared in that application's `package.json`.
+
+Install a dependency in the client:
+
+```bash
+npm install <package-name> --workspace=@wongames/client
+```
+
+Install a development dependency in the client:
+
+```bash
+npm install <package-name> --save-dev --workspace=@wongames/client
+```
+
+Install a dependency in the API:
+
+```bash
+npm install <package-name> --workspace=@wongames/api
+```
+
+Install a root development dependency:
+
+```bash
+npm install <package-name> --save-dev
+```
+
+Root dependencies should be limited to tooling shared by the repository, such as `concurrently`.
+
+After changing dependencies, commit both the relevant `package.json` and the root `package-lock.json`.
+
+## Application Architecture
+
+The main communication flow is:
+
+```text
+Browser
+   |
+   v
+Next.js Client
+   |
+   | GraphQL and authentication requests
+   v
+Strapi API
+   |
+   v
+PostgreSQL
+```
+
+External integrations are accessed through the appropriate application layer:
+
+```text
+Next.js Client --------> Stripe.js
+       |
+       v
+Strapi API ------------> Stripe API
+       |
+       +---------------> Cloudinary
+       |
+       +---------------> SMTP provider
+       |
+       v
+PostgreSQL
+```
+
+Private integration credentials must remain in the API environment. The client must only receive values that are safe to expose to the browser, such as the Stripe publishable key.
+
+## GraphQL Workflow
+
+GraphQL operations used by the client are stored in:
+
+```text
+client/graphql/
+```
+
+The client generates TypeScript artifacts from the API GraphQL schema.
+
+With the API running, execute:
+
+```bash
+npm run codegen
+```
+
+Generated files must not be edited manually.
+
+When an API content type, query, mutation, fragment, or GraphQL response changes:
+
+1. Start the API.
+2. Regenerate the GraphQL client artifacts.
+3. Run the client type validation.
+4. Run the tests.
+5. Build both applications.
+
+```bash
+npm run codegen
+npm run typecheck:client
+npm run test:ci
+npm run build
+```
+
+## Database
+
+The API uses PostgreSQL as its primary database.
+
+Database credentials are configured in:
+
+```text
+api/.env
+```
+
+The API database configuration is located in:
+
+```text
+api/config/database.ts
+```
+
+When Docker Compose is used, the database host depends on where the API is running.
+
+If the API runs directly on the host machine:
+
+```env
+DATABASE_HOST=127.0.0.1
+```
+
+If the API and database run in the same Docker Compose network:
+
+```env
+DATABASE_HOST=postgres
+```
+
+## Code Quality
+
+The repository applies the following validation tools:
+
+* ESLint for static analysis
+* TypeScript for type validation
+* Jest and Testing Library for automated tests
+* Storybook for isolated component development
+* Husky and lint-staged for Git hooks
+* GitHub Actions for pull request and branch validation
+* Production builds for integration validation
+
+Before opening a pull request, run:
+
+```bash
+npm run lint
+npm run typecheck
+npm run test:ci
+npm run build
+```
+
+GraphQL changes must also run:
+
+```bash
+npm run codegen
+```
+
+## Continuous Integration
+
+The repository contains separate workflows for each application:
+
+```text
+.github/workflows/
+├── client-ci.yml
+└── api-ci.yml
+```
+
+### Client workflow
+
+The client workflow should run when changes affect:
+
+```text
+client/**
+package.json
+package-lock.json
+.github/workflows/client-ci.yml
+```
+
+The expected validation steps are:
+
+1. Checkout the repository.
+2. Configure Node.js 20.
+3. Restore the npm cache.
+4. Install dependencies with `npm ci`.
+5. Run client lint.
+6. Run client type validation.
+7. Run client tests.
+8. Build the client.
+
+### API workflow
+
+The API workflow should run when changes affect:
+
+```text
+api/**
+package.json
+package-lock.json
+.github/workflows/api-ci.yml
+```
+
+The expected validation steps are:
+
+1. Checkout the repository.
+2. Configure Node.js 20.
+3. Restore the npm cache.
+4. Install dependencies with `npm ci`.
+5. Configure the required environment variables.
+6. Build the API.
+
+Future API tests can be added to the same workflow.
+
+Both workflows must execute `npm ci` from the repository root because the project uses a single lockfile and npm Workspaces.
+
+## Branch Strategy
+
+The recommended branch naming convention is:
+
+* `main`: stable version
+* `develop`: integration branch
+* `feature/*`: new features
+* `fix/*`: bug fixes
+* `refactor/*`: internal improvements
+* `chore/*`: maintenance and infrastructure changes
+
+Examples:
+
+```text
+feature/game-search
+fix/checkout-validation
+refactor/graphql-client
+chore/update-strapi
+```
+
+## Commit Messages
+
+Use objective and descriptive commit messages.
+
+Examples:
+
+```text
+feat: add platform filter
+fix: handle expired authentication session
+refactor: extract checkout service
+test: cover wishlist behavior
+chore: update workspace configuration
+```
+
+## Pull Requests
+
+Each pull request should:
+
+* Describe the problem or requirement.
+* Explain the implemented solution.
+* Include testing instructions.
+* Include screenshots for visual changes.
+* Document new environment variables.
+* Keep a limited and well-defined scope.
+* Pass all applicable CI validations.
+
+Changes affecting the GraphQL contract should preferably update the API and client in the same pull request.
+
+## Deployment
+
+The client and API can be deployed independently, even though they share the same repository.
+
+### Client deployment
+
+The client requires an environment compatible with Next.js.
+
+Production configuration must include:
+
+* Public API URL
+* GraphQL endpoint
+* Auth.js URL
+* Auth.js secret
+* Stripe publishable key
+
+Build the client with:
+
+```bash
+npm run build:client
+```
+
+### API deployment
+
+The API requires:
+
+* Node.js 20
+* PostgreSQL
+* Cloudinary credentials
+* SMTP credentials
+* Stripe secret key
+* Strapi application secrets
+
+Build the API with:
+
+```bash
+npm run build:api
+```
+
+Production must use the Strapi `start` command rather than `develop`.
+
+```bash
+npm run start --workspace=@wongames/api
+```
+
+## Security Guidelines
+
+* Never expose private keys in the client.
+* Never commit environment files.
+* Use different secrets for each environment.
+* Restrict access to the Strapi administration panel.
+* Use HTTPS in production.
+* Review public and authenticated Strapi permissions.
+* Restrict CORS to known origins.
+* Do not log passwords, JWTs, payment data, or private credentials.
+* Calculate payment amounts on the API.
+* Rotate credentials after any suspected exposure.
+* Keep dependencies updated and review major version upgrades before deployment.
+
+## Internal Documentation
+
+Application-specific instructions are available in:
+
+* [Client documentation](client/README.md)
+* [API documentation](api/README.md)
+
+<br />
+
+---
+
+<br />
+
+**Built with ☕ by [Pedro Estevão](https://www.pedroestevao.com)**

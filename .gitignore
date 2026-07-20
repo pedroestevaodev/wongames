@@ -1,55 +1,111 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Dependencies
+node_modules/
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
+# npm
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+.npm/
+.npmrc.local
 
-# env
-.env
-.env.development
-.env.production
+# The monorepo uses a single lockfile at the repository root
+client/package-lock.json
+api/package-lock.json
 
-# local env files
-.env*.local
+# Environment variables
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.*.example
 
-# vercel
-.vercel
+# Logs
+logs/
+*.log
+*.log.*
+*.pid
+*.pid.lock
 
-# typescript
+# Test coverage and reports
+coverage/
+client/coverage/
+api/coverage/
+test-results/
+junit.xml
+
+# Next.js
+client/.next/
+client/out/
+client/build/
+client/next-env.d.ts
+
+# Storybook
+client/storybook-static/
+
+# Vercel
+client/.vercel/
+
+# Strapi
+api/.cache/
+api/.tmp/
+api/.strapi/
+api/build/
+api/dist/
+api/exports/
+api/*.tgz
+
+# Strapi local uploads
+api/public/uploads/*
+!api/public/uploads/.gitkeep
+
+# TypeScript
 *.tsbuildinfo
-next-env.d.ts
 
-# local env files
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# ESLint and tooling caches
+.eslintcache
+.stylelintcache
+.cache/
 
-# sw stuff
-public/sw.js
-public/workbox-*.js
+# Husky generated files
+.husky/_/
+client/.husky/_/
+api/.husky/_/
 
-# storybook
-storybook-static
-/.storybook/cache
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Package manager artifacts
+.pnp
+.pnp.js
+.pnp.cjs
+.yarn/
+pnpm-lock.yaml
+pnpm-workspace.yaml
+
+# Operating system files
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+Desktop.ini
+
+# IDEs and editors
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# Certificates and private keys
+*.pem
+*.key
+
+# Local database files
+*.sqlite
+*.sqlite3
+*.db
