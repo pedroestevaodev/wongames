@@ -881,8 +881,6 @@ npm run build:api
 * Keep Strapi and plugins updated.
 * Review third-party plugins before major upgrades.
 
-<br />
-
 ---
 
 **Built with ☕ by [Pedro Estevão](https://www.pedroestevao.com)**

@@ -632,8 +632,6 @@ Application-specific instructions are available in:
 * [Client documentation](client/README.md)
 * [API documentation](api/README.md)
 
-<br />
-
 ---
 
 **Built with ☕ by [Pedro Estevão](https://www.pedroestevao.com)**

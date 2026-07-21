@@ -750,8 +750,6 @@ npm run build:client
 * Review authentication and payment dependency updates carefully.
 * Keep payment calculations on the API.
 
-<br />
-
 ---
 
 **Built with ☕ by [Pedro Estevão](https://www.pedroestevao.com)**
