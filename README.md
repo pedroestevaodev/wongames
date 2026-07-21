@@ -636,6 +636,4 @@ Application-specific instructions are available in:
 
 ---
 
-<br />
-
 **Built with ☕ by [Pedro Estevão](https://www.pedroestevao.com)**

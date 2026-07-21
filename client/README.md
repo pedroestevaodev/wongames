@@ -754,6 +754,4 @@ npm run build:client
 
 ---
 
-<br />
-
 **Built with ☕ by [Pedro Estevão](https://www.pedroestevao.com)**

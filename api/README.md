@@ -885,6 +885,4 @@ npm run build:api
 
 ---
 
-<br />
-
 **Built with ☕ by [Pedro Estevão](https://www.pedroestevao.com)**
